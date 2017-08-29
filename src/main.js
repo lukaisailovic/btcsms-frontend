@@ -7,7 +7,8 @@ import Navigation from './components/Navigation'
 import axios from 'axios'
 import VeeValidate from 'vee-validate'
 import VueSweetAlert from 'vue-sweetalert'
-
+import {store} from './store'
+import auth from './auth'
 /**
  * CSS Imports
  */
@@ -39,6 +40,16 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
-  components: { App }
+  components: { App },
+  created(){
+    if (auth.isAuthenticated() == true) {
+      auth.getUser().then((user)=>{
+        this.$store.dispatch('SignUserIn',user);
+      }).catch((err)=>{
+
+      });
+    }
+  },
 })

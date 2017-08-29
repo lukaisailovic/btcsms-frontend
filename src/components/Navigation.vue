@@ -14,15 +14,23 @@
 
           <div class="collapse navbar-collapse" id="navbar-primary">
               <ul class="navbar-nav ml-auto">
-                  <router-link :to="{ name: '', params: {} }" tag="li" class="nav-item">
-                      <a class="nav-link" href="#">&nbsp;Discover</a>
-                  </router-link>
-                  <router-link :to="{ name: 'signin', params: {} }" tag="li" class="nav-item">
-                      <a class="nav-link" href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Sign In</a>
-                  </router-link>
-                  <router-link :to="{ name: 'register', params: {} }" tag="li" class="nav-item">
-                      <a class="nav-link" href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;Register</a>
-                  </router-link>
+                    <router-link :to="{ name: '', params: {} }" tag="li" class="nav-item">
+                        <a class="nav-link" href="#">&nbsp;Discover</a>
+                    </router-link>
+
+                    <router-link :to="{ name: 'signin', params: {} }" tag="li" class="nav-item" v-if="user == null">
+                        <a class="nav-link" href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Sign In</a>
+                    </router-link>
+                    <router-link :to="{ name: 'register', params: {} }" tag="li" class="nav-item" v-if="user == null">
+                        <a class="nav-link" href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;Register</a>
+                    </router-link>
+                    <li class="nav-item"  v-if="user !== null">
+                      <a class="nav-link" href="#"> {{user.username}}</a>
+                    </li>                  
+                    <li class="nav-item"  v-if="user !== null">
+                      <a class="nav-link" href="#" @click.prevent="SignUserOut"> Sign Out</a>
+                    </li>
+
               </ul>
           </div>
       </div>
@@ -32,15 +40,29 @@
 
 <script>
 import config from "../config"
+import auth from "../auth"
 export default {
   name: 'hello',
   data () {
     return {
-      name: ''
+
     }
   },
+  computed:{
+    user(){
+      return this.$store.getters.User;
+    }
+  },
+
   created(){
-    this.name = config.name
+    this.name = config.name;
+
+  },
+
+  methods:{
+    SignUserOut(){
+      this.$store.dispatch('SignUserOut',null);
+    },
   }
 }
 </script>

@@ -40,6 +40,7 @@ export default {
       loading: false,
     }
   },
+
   methods:{
     RegisterSubmit(){
         this.loading = true;
@@ -55,13 +56,15 @@ export default {
             this.passwordConfirm = ''
           } else {
             this.$swal('Good job!',response.data.message,'success');
+            
           }
-          
+
 
         }).catch((err)=>{this.loading=false})
 
     },
-  }
+  },
+
 }
 </script>
 
