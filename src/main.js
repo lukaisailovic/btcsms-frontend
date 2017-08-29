@@ -18,8 +18,8 @@ import './assets/css/paper-kit.css'
 /**
  * JS Imports
  */
-
-
+import './assets/js/jquery-ui-1.12.1.custom.min.js'
+import './assets/js/nouislider.js'
 import './assets/js/paper-kit.js'
 
 Vue.config.productionTip = false

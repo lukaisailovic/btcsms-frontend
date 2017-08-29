@@ -14,6 +14,8 @@
 
           <div class="collapse navbar-collapse" id="navbar-primary">
               <ul class="navbar-nav ml-auto">
+
+
                     <router-link :to="{ name: '', params: {} }" tag="li" class="nav-item">
                         <a class="nav-link" href="#">&nbsp;Discover</a>
                     </router-link>
@@ -24,11 +26,13 @@
                     <router-link :to="{ name: 'register', params: {} }" tag="li" class="nav-item" v-if="user == null">
                         <a class="nav-link" href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;Register</a>
                     </router-link>
-                    <li class="nav-item"  v-if="user !== null">
-                      <a class="nav-link" href="#"> {{user.username}}</a>
-                    </li>                  
-                    <li class="nav-item"  v-if="user !== null">
-                      <a class="nav-link" href="#" @click.prevent="SignUserOut"> Sign Out</a>
+                    <li class="nav-item dropdown" v-if="user !== null">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{user.username}}</a>
+                        <ul class="dropdown-menu dropdown-menu-right dropdown-info">
+                            <li class="dropdown-item"><a href="#pk">Action</a></li>
+                            <div class="dropdown-divider"></div>
+                            <li class="dropdown-item"><a href="#pk" @click.prevent="SignUserOut">Sign Out</a></li>
+                        </ul>
                     </li>
 
               </ul>

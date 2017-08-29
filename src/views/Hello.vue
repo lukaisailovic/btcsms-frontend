@@ -1,6 +1,7 @@
 <template>
   <div class="">
     <h1>Tes</h1>
+
   </div>
 </template>
 
@@ -13,7 +14,7 @@ export default {
     }
   },
   created(){
-    
+
   }
 }
 </script>
