@@ -3,12 +3,19 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import Navigation from './components/Navigation'
 import axios from 'axios'
 import VeeValidate from 'vee-validate'
 import VueSweetAlert from 'vue-sweetalert'
 import {store} from './store'
 import auth from './auth'
+
+
+/**
+ * Component Import
+ */
+import Navigation from './components/Navigation'
+import Footer from './components/Footer'
+
 /**
  * CSS Imports
  */
@@ -23,12 +30,15 @@ import './assets/js/nouislider.js'
 import './assets/js/paper-kit.js'
 
 Vue.config.productionTip = false
-Vue.component('Navigation',Navigation)
+
 Vue.use(VeeValidate);
 Vue.use(VueSweetAlert)
 
-
-
+/**
+ * Component Register
+ */
+Vue.component('Navigation',Navigation)
+Vue.component('Footer',Footer)
 
 window.axios = axios;
 

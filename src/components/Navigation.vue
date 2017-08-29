@@ -9,7 +9,7 @@
 </button>
 
           <router-link :to="{ name: 'welcome', params: {} }"  class="navbar-brand">
-              {{name}}
+              <i class="fa fa-commenting-o" aria-hidden="true"></i> {{name}}
           </router-link>
 
           <div class="collapse navbar-collapse" id="navbar-primary">

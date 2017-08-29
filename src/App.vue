@@ -8,9 +8,9 @@
 
     <Navigation></Navigation>
     <div class="container mt-3">
-
       <router-view></router-view>
     </div>
+    <Footer></Footer>
   </div>
 </template>
 
@@ -25,5 +25,22 @@ export default {
 </script>
 
 <style>
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  line-height: 60px; /* Vertically center the text there */
+
+}
 
 </style>
