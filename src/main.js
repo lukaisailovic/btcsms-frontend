@@ -58,7 +58,7 @@ new Vue({
       auth.getUser().then((user)=>{
         this.$store.dispatch('SignUserIn',user);
       }).catch((err)=>{
-
+        auth.signOut();
       });
     }
   },

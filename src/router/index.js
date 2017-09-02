@@ -3,7 +3,12 @@ import Router from 'vue-router'
 import Hello from '@/views/Hello'
 import Register from '@/views/Register'
 import SignIn from '@/views/SignIn'
+import SendMessage from '@/views/SendMessage'
+
+
 import guestGuard from './guestGuard'
+import authGuard from './authGuard'
+
 Vue.use(Router)
 
 export default new Router({
@@ -30,6 +35,12 @@ export default new Router({
       name: 'register',
       component: Register,
       beforeEnter: guestGuard
-    }
+    },
+    {
+      path: '/message/send',
+      name: 'sendMessage',
+      component: SendMessage,    
+    },
+
   ]
 })

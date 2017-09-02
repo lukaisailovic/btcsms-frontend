@@ -16,8 +16,8 @@
               <ul class="navbar-nav ml-auto">
 
 
-                    <router-link :to="{ name: '', params: {} }" tag="li" class="nav-item">
-                        <a class="nav-link" href="#">&nbsp;Discover</a>
+                    <router-link :to="{ name: '', params: {} }" tag="li" class="nav-item" v-if="user !== null">
+                        <a href="#" class="nav-link">{{user.balance}}$</a>
                     </router-link>
 
                     <router-link :to="{ name: 'signin', params: {} }" tag="li" class="nav-item" v-if="user == null">
@@ -66,6 +66,7 @@ export default {
   methods:{
     SignUserOut(){
       this.$store.dispatch('SignUserOut',null);
+      this.$router.push('/')
     },
   }
 }
