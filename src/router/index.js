@@ -4,7 +4,7 @@ import Hello from '@/views/Hello'
 import Register from '@/views/Register'
 import SignIn from '@/views/SignIn'
 import SendMessage from '@/views/SendMessage'
-
+import Order from '@/views/Order'
 
 import guestGuard from './guestGuard'
 import authGuard from './authGuard'
@@ -39,7 +39,13 @@ export default new Router({
     {
       path: '/message/send',
       name: 'sendMessage',
-      component: SendMessage,    
+      component: SendMessage,
+    },
+    {
+      path: '/order/:hash',
+      name: 'Order',
+      component: Order,
+      props: true
     },
 
   ]

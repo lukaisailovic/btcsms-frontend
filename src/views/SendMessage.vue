@@ -37,7 +37,7 @@
     <div class="row justify-content-md-center">
       <div class="col-md-7">
         <h2 class="title">What should we send to <strong>{{number}}</strong> ? </h2>
-        <form class="" action="#" method="post">
+        <form class="" action="#" method="post" @submit.prevent="sendMessage">
 
           <div :class="{'form-group':true,'has-danger':BodyLength >150 }">
             <textarea  rows="8" cols="80" class="form-control" style="resize:none" v-model="body"></textarea>
@@ -53,6 +53,10 @@
           </div>
 
         </form>
+
+        <div class="form-group text-center" v-if="auth">
+          <a href="#" @click.prevent="sendMessageNotAuth" :class="{'disabled': BodyLength == 0 || BodyLength > 150 || price == 0 }">I don't want to pay with my accounnt balance balance</a>
+        </div>
       </div>
     </div>
   </div>
@@ -124,11 +128,39 @@ export default {
 
       });
     }, // end of method
+    sendMessage(){
+      if (!this.auth) {
+        this.sendMessageNotAuth();
+      } else {
+        axios.post(config.backend+'/message/send/authenticated',{
+          number: this.number,
+          body: this.body,
+          price: this.price
+        }).then((response)=>{
+            console.log(response)
+
+        }).catch((err)=>{});
+      }
+
+    }, // end of method
+    sendMessageNotAuth(){
+      axios.post(config.backend+'/message/send/unauthenticated',{
+        number: this.number,
+        body: this.body,
+        price: this.price
+      }).then((response)=>{
+        console.log(response)
+
+      }).catch((err)=>{});
+
+    }, // end of method
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-
+<style scoped>
+a.disabled {
+    pointer-events: none;
+}
 </style>
