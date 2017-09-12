@@ -13,9 +13,7 @@
       </div>
 
       <div v-if="order.paid == true">
-        <div class="description mt-5">
-          Looks like this order is paid and message is sent successfully !
-        </div>
+        <p class="mt-5">Looks like this order is paid and message is sent successfully !</p>
       </div>
 
       </div>
@@ -38,7 +36,7 @@ export default {
   data () {
     return {
       order: null,
-      failure: false,    
+      failure: false,
     }
   },
 
@@ -55,7 +53,32 @@ export default {
 
     }).catch((err)=>{});
 
+    let that = this;
+    setInterval(function(){
+      that.checkIfOrderIsPaid()
+    }, 10000);
+
+
   },
+  methods:{
+    checkIfOrderIsPaid(){
+      if (this.order !==null && this.order !== undefined && this.order.paid == false) {
+        axios.post(config.backend+'/order/check',{
+          hash: this.hash,
+        }).then((response) => {
+          if (response.data.success == false) {
+           if (response.data.paid == null) {
+             this.failure = true
+           }
+          } else {
+            this.order = response.data.order
+          }
+
+        }).catch((err)=>{});
+      }
+    },
+  },
+
 }
 </script>
 

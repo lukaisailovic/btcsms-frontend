@@ -47,7 +47,9 @@
           <div class="form-group text-center" v-if="price !== 0">
             <p class="form-text text-warning">Price for this message is <strong>{{price}} USD</strong></p>
           </div>
-
+          <div class="form-group text-center" v-if="error.message !==''">
+            <p class="text-danger">{{error.message}}</p>
+          </div>
           <div class="form-group text-center">
             <button type="submit" class="btn btn-default btn-round" :disabled="BodyLength == 0 || BodyLength > 150 || price == 0">Send message</button>
           </div>
@@ -75,6 +77,7 @@ export default {
       price: 0,
       error: {
         numberValidation: false,
+        message:"",
       },
       stage: 1,
     }
@@ -129,27 +132,40 @@ export default {
       });
     }, // end of method
     sendMessage(){
+      this.error.message = '';
+      let that = this;
       if (!this.auth) {
         this.sendMessageNotAuth();
       } else {
-        axios.post(config.backend+'/message/send/authenticated',{
+        let cfg = {'Authorization': localStorage.getItem("token")};
+        axios({
+        method: 'post',
+        url: config.backend+'/message/send/authenticated',
+        headers: cfg,
+        data: {
           number: this.number,
           body: this.body,
           price: this.price
-        }).then((response)=>{
-            console.log(response)
+        }
+      }).then((response)=>{
+           if (response.data.success == true) {
+             this.$router.push('/order/'+response.data.order.hash)
+           } else {
+             that.error.message = response.data.message;
+           }
 
         }).catch((err)=>{});
       }
 
     }, // end of method
     sendMessageNotAuth(){
+        this.error.message = '';
       axios.post(config.backend+'/message/send/unauthenticated',{
         number: this.number,
         body: this.body,
         price: this.price
       }).then((response)=>{
-        console.log(response)
+          this.$router.push('/order/'+response.data.order.hash)
 
       }).catch((err)=>{});
 
