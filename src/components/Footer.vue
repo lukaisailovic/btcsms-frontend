@@ -5,7 +5,7 @@
     			<div class="row">
     				<div class="text-center">
               <span class="copyright">
-    						© {{year}}, made with <i class="fa fa-heart heart"></i> by {{author}}
+    						© {{year}}, made with <i class="fa fa-heart heart"></i> by {{author}} Powered by Senderon
     					</span>
     				</div>
     			</div>

@@ -4,8 +4,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 offset-md-2">
-                        <h2 class="title">Let's talk product</h2>
-                        <h5 class="description">This is the paragraph where you can write more details about your product. Keep you user engaged by providing meaningful information. Remember that by this time, the user is curious, otherwise he wouldn't scroll to get here. Add a button if you want the user to see more.</h5>
+                        <h2 class="title">Let's talk {{name}}</h2>
+                        <h5 class="description">Leka is an anonymous SMS tool by which is enabled through Bitcoin micropayments. Our simple setup and layout makes it easy to send a message from anyone, to anywhere.</h5>
                         <br>
                         <router-link :to="{ name: 'sendMessage', params: {} }" class="btn btn-danger btn-round">
                             <i class="fa fa-paper-plane" aria-hidden="true"></i> Send Message
@@ -22,7 +22,7 @@
 							</div>
 							<div class="description">
 								<h4 class="info-title">Cheap</h4>
-								<p class="description">Spend your time generating new ideas. You don't have to think of implementing.</p>
+								<p class="description">Minimal Fees put Leka in contention with typical Pay-as-you-go methods, especially with international messages.</p>
 							</div>
 						</div>
 					</div>
@@ -57,7 +57,7 @@
 							</div>
 							<div class="description">
 								<h4 class="info-title">Delightful design</h4>
-								<p>Find unique and handmade delightful designs related items directly from our sellers.</p>
+								<p>Our easy to use layout makes sending SMS’s with Bitcoin accessible to everyone - everywhere.</p>
 
 							</div>
 						</div>
@@ -72,11 +72,17 @@
 </template>
 
 <script>
+import config from "../config"
 export default {
   name: 'hello',
   data () {
     return {
 
+    }
+  },
+  computed:{
+    name(){
+      return config.name
     }
   },
   created(){

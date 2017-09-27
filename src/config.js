@@ -1,5 +1,5 @@
 export default {
-  name: 'BTC SMS',
+  name: 'Leka',
   backend: 'http://localhost:3000',
   author: 'Eckmar'
 }

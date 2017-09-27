@@ -5,6 +5,7 @@ import Register from '@/views/Register'
 import SignIn from '@/views/SignIn'
 import SendMessage from '@/views/SendMessage'
 import Order from '@/views/Order'
+import About from '@/views/About'
 
 import guestGuard from './guestGuard'
 import authGuard from './authGuard'
@@ -46,6 +47,11 @@ export default new Router({
       name: 'Order',
       component: Order,
       props: true
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: About,
     },
 
   ]

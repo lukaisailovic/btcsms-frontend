@@ -12,6 +12,10 @@
               <i class="fa fa-commenting-o" aria-hidden="true"></i> {{name}}
           </router-link>
 
+          <router-link :to="{ name: 'about', params: {} }"  class="navbar-brand">
+              <i class="fa fa-question-circle" aria-hidden="true"></i> About
+          </router-link>
+
           <div class="collapse navbar-collapse" id="navbar-primary">
               <ul class="navbar-nav ml-auto">
 
