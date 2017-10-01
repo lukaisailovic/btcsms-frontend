@@ -18,7 +18,10 @@
       </div>
       <div class="form-group text-center">
         <p class="text-muted">Balance not updating ? </p>
-        <button type="button" name="button" class="btn btn-default">Update Balance</button>
+        <button type="button" name="button" class="btn btn-default" @click.prevent="checkBalance" :disabled="loading == true">
+          <span v-if="loading == false">Update Balance</span>
+          <span v-if="loading == true"><i class="fa fa-circle-o-notch fa-spin "></i> Checking</span>
+        </button>
       </div>
 
     </div>
@@ -26,11 +29,13 @@
 </template>
 
 <script>
+import config from '../config'
+import auth from '../auth'
 export default {
   name: 'hello',
   data () {
     return {
-
+      loading: false,
     }
   },
   computed:{
@@ -38,6 +43,33 @@ export default {
       return this.$store.getters.User;
     }
   },
+  methods:{
+    checkBalance(){
+      this.loading = true;
+      console.log(true)
+      let cfg = {'Authorization': localStorage.getItem("token")};
+      axios({
+      method: 'post',
+      url: config.backend+'/balance/check/',
+      headers: cfg,
+
+    }).then((response)=>{
+      this.loading = false;
+         console.log(response)
+
+        if (response.data.success == true) {
+          auth.getUser().then((user)=>{
+            this.$store.dispatch('SignUserIn',user);
+          }).catch((err)=>{
+
+          });
+        }
+
+      }).catch((err)=>{
+        this.loading = false;
+      });
+    },
+  }
 }
 </script>
 
