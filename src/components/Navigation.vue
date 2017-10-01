@@ -33,7 +33,10 @@
                     <li class="nav-item dropdown" v-if="user !== null">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{user.username}}</a>
                         <ul class="dropdown-menu dropdown-menu-right dropdown-info">
-                            <li class="dropdown-item"><a href="#pk">Action</a></li>
+                          <router-link :to="{ name: 'profile', params: {} }" tag="li" class="dropdown-item" v-if="user !== null">
+                              <a href="#">Profile</a>
+                          </router-link>
+
                             <div class="dropdown-divider"></div>
                             <li class="dropdown-item"><a href="#pk" @click.prevent="SignUserOut">Sign Out</a></li>
                         </ul>
