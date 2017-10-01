@@ -30,6 +30,7 @@
 
 <script>
 import config from "../config"
+import auth from '../auth'
 export default {
   props: ['hash'],
   name: 'Order',
@@ -48,6 +49,11 @@ export default {
       if (response.data.success == false) {
         this.failure = true
       } else {
+        auth.getUser().then((user)=>{
+          this.$store.dispatch('SignUserIn',user);
+        }).catch((err)=>{
+
+        });
         this.order = response.data.order
       }
 
@@ -71,6 +77,11 @@ export default {
              this.failure = true
            }
           } else {
+            auth.getUser().then((user)=>{
+              this.$store.dispatch('SignUserIn',user);
+            }).catch((err)=>{
+
+            });
             this.order = response.data.order
           }
 

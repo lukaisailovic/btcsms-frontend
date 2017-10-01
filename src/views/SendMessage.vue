@@ -68,6 +68,7 @@
 
 <script>
 import config from "../config"
+
 export default {
   name: 'hello',
   data () {
