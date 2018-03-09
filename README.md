@@ -1,6 +1,8 @@
 # btcsms-frontend
 
-> BTC SMS Frontend
+Send SMS messages and pay in Bitcoin
+
+This is a frontend part of the website.
 
 ## Build Setup
 
